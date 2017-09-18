@@ -1,4 +1,5 @@
 # coding: utf-8
+import os
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -12,7 +13,7 @@ app = Flask(__name__)
 
 app.config['DEBUG'] = True
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 # Turn off the flask_sqlalchemy's modification tracker, and use sqlalchemy's.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = "secretkey"
