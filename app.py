@@ -9,6 +9,9 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
 app = Flask(__name__)
+
+app.config['DEBUG'] = True
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 # Turn off the flask_sqlalchemy's modification tracker, and use sqlalchemy's.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
