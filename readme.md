@@ -9,3 +9,7 @@
 `python run.py`
 
 第一次请求会自动生成数据表格。
+
+## api swagger
+
+http://localhost:5000/apidocs/

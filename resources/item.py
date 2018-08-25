@@ -22,12 +22,24 @@ class Item(Resource):
 
     @jwt_required()
     def get(self, name):
+        """
+        获取一个item
+        ---
+        tags:
+          - item
+        """
         item = ItemModel.find_by_name(name)
         if item:
             return item.json()
         return {'message': 'Item not found'}, 404
 
     def post(self, name):
+        """
+        create one item
+        ---
+        tags:
+          - item
+        """
         if ItemModel.find_by_name(name):
             return {'message': "An item with name '{}' already exists.".format(name)}, 400
 
@@ -43,6 +55,12 @@ class Item(Resource):
         return item.json(), 201
 
     def delete(self, name):
+        """
+        delete one item
+        ---
+        tags:
+          - item
+        """
         item = ItemModel.find_by_name(name)
         if item:
             item.delete_from_db()
@@ -50,6 +68,12 @@ class Item(Resource):
         return {'message': 'Item deleted'}
 
     def put(self, name):
+        """
+        update one item
+        ---
+        tags:
+          - item
+        """
         # data = request.get_json()
         data = Item.parser.parse_args()
 
@@ -70,5 +94,20 @@ class Item(Resource):
 
 class ItemList(Resource):
     def get(self):
+        """
+        item list
+        ---
+        tags:
+          - item
+        responses:
+          200:
+            description: The task data
+            schema:
+              id: Item
+              properties:
+                items:
+                  type: list
+                  default: []
+        """
         # return {'items': [item.json for item in ItemModel.query.all()]}
         return {'items': list(map(lambda x: x.json(), ItemModel.query.all()))}

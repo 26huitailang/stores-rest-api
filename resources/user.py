@@ -20,6 +20,12 @@ class UserRegister(Resource)   :
     )
 
     def post(self):
+        """
+        regist a user
+        ---
+        tags:
+          - user
+        """
         data = UserRegister.parser.parse_args()
 
         if UserModel.find_by_username(data['username']):
