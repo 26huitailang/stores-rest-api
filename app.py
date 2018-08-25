@@ -4,6 +4,7 @@ from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
 from flasgger import Swagger
+from flask_cors import CORS
 from db import db
 
 from security import authenticate, identity
@@ -16,6 +17,8 @@ db.init_app(app)
 api = Api(app)
 # swagger
 swag = Swagger(app)
+# 跨域
+cors = CORS(app)
 
 app.config['DEBUG'] = True
 app.config['SWAGGER'] = {
