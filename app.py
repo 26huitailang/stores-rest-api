@@ -34,5 +34,3 @@ api.add_resource(Store, '/store/<string:name>')
 api.add_resource(ItemList, '/items')
 api.add_resource(StoreList, '/stores')
 api.add_resource(UserRegister, '/register')
-
-app.run(port=5000)
