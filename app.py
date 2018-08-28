@@ -12,28 +12,32 @@ from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
-app = Flask(__name__)
-db.init_app(app)
-api = Api(app)
-# swagger
-swag = Swagger(app)
-# 跨域
-cors = CORS(app)
 
-app.config['DEBUG'] = True
-app.config['SWAGGER'] = {
-    'title': 'Flasgger RESTful',
-    'uiversion': 2
-}
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
-# Turn off the flask_sqlalchemy's modification tracker, and use sqlalchemy's.
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = "secretkey"
+def create_app():
+    app = Flask(__name__)
+    db.init_app(app)
+    api = Api(app)
+    # swagger
+    Swagger(app)
+    # 跨域
+    CORS(app)
 
-jwt = JWT(app, authenticate, identity)  # /auth
+    app.config['DEBUG'] = True
+    app.config['SWAGGER'] = {
+        'title': 'Flasgger RESTful',
+        'uiversion': 2
+    }
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+    # Turn off the flask_sqlalchemy's modification tracker, and use sqlalchemy's.
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.secret_key = "secretkey"
 
-api.add_resource(Item, '/item/<string:name>')
-api.add_resource(Store, '/store/<string:name>')
-api.add_resource(ItemList, '/items')
-api.add_resource(StoreList, '/stores')
-api.add_resource(UserRegister, '/register')
+    jwt = JWT(app, authenticate, identity)  # /auth
+
+    api.add_resource(Item, '/item/<string:name>')
+    api.add_resource(Store, '/store/<string:name>')
+    api.add_resource(ItemList, '/items')
+    api.add_resource(StoreList, '/stores')
+    api.add_resource(UserRegister, '/register')
+
+    return app

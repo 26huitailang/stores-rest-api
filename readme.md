@@ -4,6 +4,10 @@
 
 练习部署Heroku。
 
+## 测试数据
+
+`python manage.py develop init`
+
 ## 启动
 
 `python run.py`
