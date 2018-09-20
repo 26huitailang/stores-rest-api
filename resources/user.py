@@ -1,10 +1,11 @@
 # coding: utf-8
 from flask_restful import Resource, reqparse
+from flask_jwt import jwt_required
 
 from models.user import UserModel
 
 
-class UserRegister(Resource)   :
+class UserRegister(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument(
         'username',
@@ -19,6 +20,7 @@ class UserRegister(Resource)   :
         help="This field cannot be blank."
     )
 
+    @jwt_required()
     def post(self):
         """
         regist a user
@@ -35,3 +37,15 @@ class UserRegister(Resource)   :
         user.save_to_db()
 
         return {'message': 'UserModel created successfully.'}, 201
+
+
+class UserList(Resource):
+    def get(self):
+        """
+        get users info
+        ---
+        tags:
+          - user
+        """
+
+        return {'users': [user.json() for user in UserModel.query.all()]}
