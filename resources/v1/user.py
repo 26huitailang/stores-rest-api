@@ -1,6 +1,6 @@
 # coding: utf-8
 from flask_restful import Resource, reqparse
-from flask_jwt import jwt_required
+from flask_jwt_extended import jwt_required
 
 from models.user import UserModel
 
@@ -20,7 +20,6 @@ class UserRegister(Resource):
         help="This field cannot be blank."
     )
 
-    @jwt_required()
     def post(self):
         """
         regist a user
@@ -40,6 +39,7 @@ class UserRegister(Resource):
 
 
 class UserList(Resource):
+    @jwt_required
     def get(self):
         """
         get users info

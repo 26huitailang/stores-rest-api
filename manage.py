@@ -8,7 +8,7 @@ from flask.cli import FlaskGroup
 
 from app import create_app
 from management.commands.develop import cli as develop
-from management.commands.develop import cli as develop
+
 
 @click.group(cls=FlaskGroup, create_app=create_app)
 def flask_cli():

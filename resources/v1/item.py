@@ -1,6 +1,6 @@
 # coding: utf-8
 from flask_restful import Resource, reqparse
-from flask_jwt import jwt_required
+from flask_jwt_extended import jwt_required
 
 from models.item import ItemModel
 
@@ -20,6 +20,7 @@ class Item(Resource):
         help="This field cannot be left blank!"
     )
 
+    @jwt_required
     def get(self, name):
         """
         获取一个item
@@ -32,7 +33,7 @@ class Item(Resource):
             return item.json()
         return {'message': 'Item not found'}, 404
 
-    @jwt_required()
+    @jwt_required
     def post(self, name):
         """
         create one item
@@ -54,7 +55,7 @@ class Item(Resource):
 
         return item.json(), 201
 
-    @jwt_required()
+    @jwt_required
     def delete(self, name):
         """
         delete one item
@@ -68,7 +69,7 @@ class Item(Resource):
 
         return {'message': 'Item deleted'}
 
-    @jwt_required()
+    @jwt_required
     def put(self, name):
         """
         update one item
@@ -95,6 +96,7 @@ class Item(Resource):
 
 
 class ItemList(Resource):
+    @jwt_required
     def get(self):
         """
         item list
