@@ -1,5 +1,5 @@
 # coding: utf-8
-from db import db
+from database import db
 
 
 class StoreModel(db.Model):

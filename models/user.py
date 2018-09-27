@@ -1,6 +1,5 @@
 # coding: utf-8
-import sqlite3
-from db import db
+from database import db
 
 
 class UserModel(db.Model):

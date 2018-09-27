@@ -12,7 +12,7 @@ import random
 
 from datetime import datetime, timedelta
 from flask.cli import with_appcontext
-from db import db
+from database import db
 
 from app import create_app
 from models.user import UserModel

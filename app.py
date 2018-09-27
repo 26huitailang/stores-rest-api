@@ -1,11 +1,10 @@
 # coding: utf-8
-import os
 from flask import Flask
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from flasgger import Swagger
 from flask_cors import CORS
-from db import db
+from database import db
 
 from resources.v1.user import UserRegister, UserList
 from resources.v1.item import Item, ItemList
@@ -27,7 +26,7 @@ def create_app():
         'title': 'Flasgger RESTful',
         'uiversion': 2
     }
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
     # Turn off the flask_sqlalchemy's modification tracker, and use sqlalchemy's.
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     # setup flask-jwt-extended extension

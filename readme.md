@@ -10,7 +10,7 @@
 
 ## 启动
 
-`python run.py`
+`python store_app.py`
 
 第一次请求会自动生成数据表格。
 

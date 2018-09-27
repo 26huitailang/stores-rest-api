@@ -2,7 +2,7 @@ Flask
 Flask-RESTful
 Flask-SQLAlchemy
 flask-jwt-extended
-uwsgi
+gunicorn
 psycopg2
 flasgger
 flask-cors
